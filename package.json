@@ -9,12 +9,22 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [{
       "command": "summarine.helloWorld",
       "title": "Hello World"
+    }, {
+      "command": "summarine.sidePreview",
+      "title": "Show side preview",
+      "category": "menubar",
+      "icon": {
+            "light": "./assets/PreviewOnRightPane_16x.svg",
+            "dark": "./assets/PreviewOnRightPane_16x_dark.svg"
+       }
     }]
   },
   "scripts": {
