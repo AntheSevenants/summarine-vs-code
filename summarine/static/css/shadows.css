@@ -1,0 +1,24 @@
+/* SHADOWS */
+
+.item.modal_, .item.course, .item.navigation, .item.overview, .summary .box, .summary table, button, .progressbar, .item.button, .item.job
+{
+	box-shadow: 0px 7px 8px 0px rgba(127,127,127,0.3);
+}
+
+.item.navigation.centre.bottom .item
+{
+	box-shadow: 0px -7px 8px 0px rgba(127,127,127,0.3);
+}
+/*
+::-webkit-scrollbar {
+	box-shadow: -7px 0px 8px 0px rgba(127,127,127,0.3);
+}*/
+
+.item.gutter.gutter-horizontal {
+	box-shadow: 7px 0px 8px 0px rgba(127,127,127,0.3);
+}
+
+.item.gutter.gutter-vertical {
+	box-shadow: 0px 7px 8px 0px rgba(127,127,127,0.3),
+				0px -7px 8px 0px rgba(127,127,127,0.3);
+}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content" id="view_courses">
+    {% include 'notice.html' %}
+    {% for group_name, group in groups %}
+        <div class="group">
+            <div class="name">{{ group_name }}</div>
+            <div class="items">
+                {% for filename in group %}
+                    <a class="item course" href="{{ filename }}.html">
+                        <div class="name">{{ filename }}</div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

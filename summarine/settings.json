@@ -1,0 +1,455 @@
+{
+    "containers": {
+        "acco": [
+            "<div class=\"accolade\">",
+            "</div>",
+            76
+        ],
+        "avs": [
+            "<div class=\"box avs\">",
+            "</div>",
+            70
+        ],
+        "bigtex": [
+            "<div class=\"bigtex\">",
+            "</div>",
+            66
+        ],
+        "code": [
+            "<div class=\"box code\"><div class=\"icon\"><i class=\"fas fa-code\"></i></i></div><div class=\"text\">",
+            "</div></div>",
+            -1
+        ],
+        "columns": [
+            "<div class=\"columns\">",
+            "</div>",
+            85
+        ],
+        "deflist": [
+            "<div class=\"box deflist\">",
+            "</div>",
+            68
+        ],
+        "eq": [
+            "<div class=\"box equation\">",
+            "</div>",
+            81
+        ],
+        "example": [
+            "<div class=\"box example\"><div class=\"icon\"><i class=\"fas fa-hand-pointer\"></i></div><div class=\"text\">",
+            "</div></div>",
+            69
+        ],
+        "exercise": [
+            "<div class=\"box exercise\"><div class=\"icon\"><i class=\"fas fa-dumbbell\"></i></div><div class=\"text\">",
+            "</div></div>",
+            -1
+        ],
+        "gallery": [
+            "<div class=\"box gallery\">",
+            "</div>",
+            71
+        ],
+        "gallery port": [
+            "<div class=\"box gallery portrait\">",
+            "</div>",
+            -1
+        ],
+        "info": [
+            "<div class=\"box info\"><div class=\"icon\"><i class=\"fas fa-info-circle\"></i></div><div class=\"text\">",
+            "</div></div>",
+            73
+        ],
+        "network": [
+            "$network$",
+            "$/network$",
+            78
+        ],
+        "noprint": [
+            "<div class=\"noprint\">",
+            "</div>",
+            -1
+        ],
+        "reader": [
+            "<div class=\"box reader\">",
+            "</div>",
+            82
+        ],
+        "reader wide": [
+            "<div class=\"box reader wide\">",
+            "</div>",
+            -1
+        ],
+        "rewrite": [
+            "<div class=\"box rewrite\"><div class=\"icon\"><i class=\"fas fa-language\"></i></div><div class=\"text\"><p><strong>Herschrijfregels</strong></p>",
+            "</div></div>",
+            -1
+        ],
+        "syntax": [
+            "$syntax$",
+            "$/syntax$",
+            83
+        ],
+        "warn": [
+            "<div class=\"box warn\"><div class=\"icon\"><i class=\"fas fa-exclamation-triangle\"></i></div><div class=\"text\">",
+            "</div></div>",
+            77
+        ],
+        "wide": [
+            "<div class=\"wide\">",
+            "</div>",
+            89
+        ],
+        "widec": [
+            "<div class=\"wide center\">",
+            "</div>",
+            67
+        ],
+        "widej": [
+            "<div class=\"wide justify\">",
+            "</div>",
+            -1
+        ]
+    },
+    "highlights": [
+        "IE",
+        "PIE",
+        "GOT",
+        "LAT",
+        "OGM",
+        "OI",
+        "GR",
+        "GM",
+        "NL",
+        "NLD",
+        "GER",
+        "ENG",
+        "FR",
+        "DE",
+        "ES",
+        "IT",
+        "BE",
+        "VL",
+        "USA",
+        "VS",
+        "ONL",
+        "MNL",
+        "NNL",
+        "US",
+        "UK",
+        "PL",
+        "AFR",
+        "RU",
+        "AR",
+        "FIN",
+        "EST",
+        "NO",
+        "FI",
+        "OE",
+        "ME",
+        "EModE",
+        "LModE",
+        "PDE",
+        "ModE",
+        "OFR",
+        "ON",
+        "DUT",
+        "PGER",
+        "KEL",
+        "WGM",
+        "OSA",
+        "WVL",
+        "GGM",
+        "VMNL",
+        "PGM",
+        "OWG",
+        "NHD",
+        "SAN",
+        "OHD",
+        "OWGM"
+    ],
+    "regex": [
+        [
+            "([0-9]+)de",
+            "$1<sup>de</sup>"
+        ],
+        [
+            "([0-9]+)ste",
+            "$1<sup>ste</sup>"
+        ],
+        [
+            "([0-9]+)nd",
+            "$1<sup>nd</sup>"
+        ],
+        [
+            "([0-9]+)st",
+            "$1<sup>st</sup>"
+        ],
+        [
+            "([0-9]+)rd",
+            "$1<sup>rd</sup>"
+        ],
+        [
+            "([0-9]+)th",
+            "$1<sup>th</sup>"
+        ]
+    ],
+    "translations": [
+        [
+            "\u02dc",
+            "~"
+        ],
+        [
+            "$up",
+            "\u2191"
+        ],
+        [
+            "$down",
+            "\u2193"
+        ],
+        [
+            "$contrast",
+            "\u2195"
+        ],
+        [
+            "$result",
+            "\u21b3"
+        ],
+        [
+            "$see",
+            "&#x1f441;"
+        ],
+        [
+            "$book",
+            "\ud83d\udcd6"
+        ],
+        [
+            "$slides",
+            "<i style='display: inline;' class=\"fas fa-file-powerpoint\"></i>"
+        ],
+        [
+            "$t0",
+            "<span class=\"language\">t<sub>0</sub></span>"
+        ],
+        [
+            "<->",
+            "\u27f7"
+        ],
+        [
+            "<=/>",
+            "\u21ce"
+        ],
+        [
+            "<-/>",
+            "\u21ae"
+        ],
+        [
+            "<=>",
+            "\u21d4"
+        ],
+        [
+            "=>",
+            "\u21d2"
+        ],
+        [
+            "<=",
+            "\u21d0"
+        ],
+        [
+            "->",
+            "\u2192"
+        ],
+        [
+            "<-",
+            "\u2190"
+        ],
+        [
+            "=/>",
+            "\u21cf"
+        ],
+        [
+            "-/>",
+            "\u219b"
+        ],
+        [
+            "</-",
+            "\u219a"
+        ],
+        [
+            "$negturns",
+            "\u22ad"
+        ],
+        [
+            "$negeof",
+            "\u2209"
+        ],
+        [
+            "$neg",
+            "\u00ac"
+        ],
+        [
+            "$and",
+            "\u2227"
+        ],
+        [
+            "$phi",
+            "\ud835\udf19"
+        ],
+        [
+            "$psi",
+            "\ud835\udf13"
+        ],
+        [
+            "$chi",
+            "\u03a7"
+        ],
+        [
+            "$l",
+            "\u03bb"
+        ],
+        [
+            "$or",
+            "\u2228"
+        ],
+        [
+            "$exor",
+            "\u22bb"
+        ],
+        [
+            "$xor",
+            "\u2295"
+        ],
+        [
+            "$xmin",
+            "\u2296"
+        ],
+        [
+            "$ex",
+            "<i style='display: inline;' class=\"fas fa-hand-pointer\"></i>"
+        ],
+        [
+            "$abutt",
+            "<span style=\"letter-spacing: -2px;\">\u2283\u2282</span>"
+        ],
+        [
+            "$fa",
+            "\u2200"
+        ],
+        [
+            "$e1",
+            "\u2203"
+        ],
+        [
+            "$turns",
+            "\u22a8"
+        ],
+        [
+            "$eof",
+            "\u2208"
+        ],
+        [
+            "$subof",
+            "\u2286"
+        ],
+        [
+            "$supof",
+            "\u2287"
+        ],
+        [
+            "/!\\",
+            "\u26a0"
+        ],
+        [
+            "~=",
+            "\u2248"
+        ],
+        [
+            "!=",
+            "\u2260"
+        ],
+        [
+            "\bXIX\b",
+            "19de eeuw"
+        ],
+        [
+            "\bXVIII\b",
+            "18de eeuw"
+        ],
+        [
+            "\bXX\b",
+            "20ste eeuw"
+        ],
+        [
+            "$box",
+            "#\ufe0f\u20e3"
+        ],
+        [
+            "$0",
+            "0\ufe0f\u20e3"
+        ],
+        [
+            "$1",
+            "1\ufe0f\u20e3"
+        ],
+        [
+            "$2",
+            "2\ufe0f\u20e3"
+        ],
+        [
+            "$3",
+            "3\ufe0f\u20e3"
+        ],
+        [
+            "$4",
+            "4\ufe0f\u20e3"
+        ],
+        [
+            "$5",
+            "5\ufe0f\u20e3"
+        ],
+        [
+            "$6",
+            "6\ufe0f\u20e3"
+        ],
+        [
+            "$7",
+            "7\ufe0f\u20e3"
+        ],
+        [
+            "$8",
+            "8\ufe0f\u20e3"
+        ],
+        [
+            "$9",
+            "9\ufe0f\u20e3"
+        ],
+        [
+            "$10",
+            "\ud83d\udd1f"
+        ],
+        [
+            "$todo",
+            "<span class=\"todo rendered\">TODO</span>"
+        ],
+        [
+            "$principle",
+            "\ud83d\udca1"
+        ],
+        [
+            "$zn",
+            "<span style=\"text-decoration:overline;\">zn</span>"
+        ],
+        [
+            "$w",
+            "<span style=\"text-decoration:overline;\">w</span>"
+        ],
+        [
+            "$cycle",
+            "\u21bb"
+        ],
+        [
+            "$public=true$",
+            ""
+        ]
+    ]
+}

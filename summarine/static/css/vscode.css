@@ -1,0 +1,42 @@
+/*
+	Fonts for ChromeOS
+ */
+
+ @font-face {
+	font-family: 'SegoeSymbol';
+	src: url('fonts/SegoeUISymbol.woff2') format('woff2'),
+		url('fonts/SegoeUISymbol.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*
+	Fonts for myself
+ */
+
+ @font-face {
+    font-family: 'Helvetica';
+    src: url('fonts/Helvetica.woff2') format('woff2'),
+        url('fonts/Helvetica.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('fonts/Helvetica-Bold.woff2') format('woff2'),
+        url('fonts/Helvetica-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Prevent Chrome from putting ugly borders around selected elements */
+*:focus
+{
+	outline-style:none;
+	box-shadow:none;
+	border-color:transparent;
+}
+
+body {
+}

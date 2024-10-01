@@ -1,0 +1,84 @@
+{% extends "vs-base.html" %}
+{% block content %}
+<div class="summary vdsk" id="segment_renderedViewer">
+    {{ markdown | raw }}
+</div>
+
+<script>
+    /*
+        Summarine allows you to prefix a list item with either => or <-> which translate to the fancy
+        arrows you see below. Then, the following code sets their bullet to this symbol.
+    */
+
+    function adaptList(targetElement) {
+        var elementsLi = targetElement.getElementsByTagName('li');
+
+        for (var i = 0; i < elementsLi.length; i++) {
+            var elementIndex = i;
+
+            var firstChild = elementsLi[elementIndex].firstChild;
+
+            if (firstChild != null) {
+                if (firstChild.nodeValue != null) {
+                    let character = firstChild.nodeValue.substring(0, 1);
+
+                    let charClassMap = { "⇒": "conclusion", "⟷": "contrast", "↳": "result", "≠": "unequal" };
+
+                    if (character in charClassMap) {
+                        elementsLi[elementIndex].className = charClassMap[character];
+                        firstChild.nodeValue = firstChild.nodeValue.substring(1, firstChild.nodeValue.length);
+                    }
+                }
+            }
+        }
+    }
+
+    function adaptCode(targetDocument) {
+        let elementsCode = targetDocument.getElementsByTagName("code");
+        for (var i = 0; i < elementsCode.length; i++) {
+            var elementCode = elementsCode[i];
+
+            if (typeof elementCode.className == "") {
+                elementCode.className = "language-none";
+            }
+
+            Prism.highlightElement(elementCode);
+        }
+    }
+
+    /*
+        With the new page cite containers etc, the counter-increments no longer work
+        So, I'm counting everything manually 
+    */
+    function adaptHeaders(targetDocument) {
+        let headers = targetDocument.querySelectorAll("h1,h2,h3,h4,h5,h6");
+
+        let headerCount = [0, 0, 0, 0, 0, 0];
+        headers.forEach(header => {
+            // e.g. "h4" = index 3
+            const level = parseInt(header.localName.charAt(1)) - 1;
+
+            headerCount[level]++;
+
+            let headerPrefix = "";
+            for (let i = 1; i <= level; i++) {
+                headerPrefix += `${headerCount[i]}.`;
+            }
+
+            for (let i = level + 1; i < headerCount.length; i++) {
+                headerCount[i] = 0;
+            }
+
+            //headerPrefix = headerPrefix.substring(0, headerPrefix.length - 1);
+
+            header.textContent = `${headerPrefix} ${header.textContent}`;
+        });
+    }
+
+    const renderedViewer = document.querySelector("#segment_renderedViewer");
+    adaptList(renderedViewer);
+    adaptCode(renderedViewer);
+    adaptHeaders(renderedViewer);
+</script>
+</div>
+{% endblock %}
