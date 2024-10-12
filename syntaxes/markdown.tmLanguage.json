@@ -1,0 +1,177 @@
+{
+    "scopeName": "summarine.injection",
+    "injectionSelector": "L:source.gfm, L:text.html.markdown",
+    "patterns": [
+        {
+            "include": "#headings"
+        },
+        {
+            "include": "#highlights"
+        },
+        {
+            "include": "#containers"
+        },
+        {
+            "name": "custom.marked.markdown",
+            "match": "==(.*?)=="
+        }
+    ],
+    "repository": {
+        "headings": {
+            "patterns": [
+                {
+                    "name": "markup.heading.level1.markdown",
+                    "match": "^# .*$"
+                },
+                {
+                    "name": "markup.heading.level2.markdown",
+                    "match": "^## .*$"
+                },
+                {
+                    "name": "markup.heading.level3.markdown",
+                    "match": "^### .*$"
+                },
+                {
+                    "name": "markup.heading.level4.markdown",
+                    "match": "^#### .*$"
+                },
+                {
+                    "name": "markup.heading.level5.markdown",
+                    "match": "^##### .*$"
+                }
+            ]
+        },
+        "containers": {
+            "patterns": [
+                {
+                    "name": "custom.warn.markdown",
+                    "begin": "\\$warn\\$",
+                    "end": "\\$/warn\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.warn.text.markdown",
+                            "match": ".+"
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.info.markdown",
+                    "begin": "\\$info\\$",
+                    "end": "\\$/info\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.info.text.markdown",
+                            "match": ".+",
+                            "patterns": [
+                                {
+                                    "include": "#inline"
+                                },
+                                {
+                                    "include": "#bold"
+                                },
+                                {
+                                    "include": "#italic"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.reader.markdown",
+                    "begin": "\\$reader\\$",
+                    "end": "\\$/reader\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.reader.text.markdown",
+                            "match": ".+"
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.deflist.markdown",
+                    "begin": "\\$deflist\\$",
+                    "end": "\\$/deflist\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.deflist.text.markdown",
+                            "match": ".+"
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.rewrite.markdown",
+                    "begin": "\\$rewrite\\$",
+                    "end": "\\$/rewrite\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.rewrite.text.markdown",
+                            "match": ".+"
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.example.markdown",
+                    "begin": "\\$example\\$",
+                    "end": "\\$/example\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.rewrite.text.markdown",
+                            "match": ".+",
+                            "patterns": [
+                                {
+                                    "include": "#inline"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.eq.markdown",
+                    "begin": "\\$eq\\$",
+                    "end": "\\$/eq\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.rewrite.text.markdown",
+                            "match": ".+",
+                            "patterns": [
+                                {
+                                    "include": "#inline"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.gallery.markdown",
+                    "begin": "\\$gallery\\$",
+                    "end": "\\$/gallery\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.gallery.text.markdown",
+                            "match": ".+"
+                        }
+                    ]
+                },
+                {
+                    "name": "custom.code.markdown",
+                    "begin": "\\$code\\$",
+                    "end": "\\$/code\\$",
+                    "patterns": [
+                        {
+                            "name": "custom.code.text.markdown",
+                            "match": ".+"
+                        }
+                    ]
+                }
+            ]
+        },
+        "highlights": {
+            "patterns": [
+                {
+                    "name": "custom.todo.markdown",
+                    "match": "\\$todo"
+                }
+            ]
+        }
+    }
+}

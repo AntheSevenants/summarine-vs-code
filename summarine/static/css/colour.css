@@ -1,0 +1,394 @@
+.blue .item, .important .item.blue, .blue th
+{
+	background-color: #6CB5DF;
+	border-color: #6c7cdf;
+	color: #111;
+}
+
+.blue .summary hr, .blue .do-underline, .item.blue .do-underline
+{
+	border-bottom-color: #7e85e8;
+	text-decoration-color: #df966c;
+}
+
+.blue .summary .accolade, .blue .summary .box.gallery, .blue span.highlight.acco
+{
+	border-color: #7e85e8;
+}
+
+/* body.blue
+{
+	border-color: #7e85e8;
+	background-color: #d7d9f7; 
+} */
+
+.blue .item .backdrop
+{
+	color: #b26b53;
+}
+
+.blue button.item, .blue .item.button, .blue .item.gutter {
+	background-color: #DF966C;
+	color: #fff;
+}
+
+.blue .summary a
+{
+	color: #7e85e8;
+}
+
+.blue ::selection
+{
+	background-color: #7e85e8;
+	color: #ffffff;
+}
+
+.red .item, .red .vis-item, #segmentCourses .item.red, .important .item.red, .red .summary th
+{
+	background-color: #f18585;
+	border-color: #ff8c8c;
+	color: #111;
+}
+
+.red .summary hr, .red .do-underline, .item.red .do-underline
+{
+	border-bottom-color: #ff8c8c;
+	text-decoration-color: #85f1f1;
+}
+
+.red button.item, .red .item.button, .red .item.gutter {
+	background-color: #85f1f1;
+	color: #111;
+}
+
+.red .summary .accolade, .red .summary .box.gallery, .red span.highlight.acco
+{
+	border-color: #ff8c8c;
+}
+
+/* body.red
+{
+	border-color: #ff8c8c;
+	background-color: #fff5f5;
+} */
+
+.red .halve
+{
+	border-color: #ff5b5b;
+}
+
+.red .summary a
+{
+	color: #ff5b5b;
+}
+
+.red ::selection
+{
+	background-color: #ff8c8c;
+	color: #ffffff;
+}
+
+.red .item .backdrop
+{
+	color: #b23f3f;
+}
+
+.green .item, .green .vis-item, #segmentCourses .item.green, .important .item.green, .green .summary th
+{
+	background-color: #bae981;
+	border-color: #86e981;
+	color: #111;
+}
+
+.green .summary hr, .green .do-underline, .item.green .do-underline
+{
+	border-bottom-color: #86e981;
+	text-decoration-color: #b081e9;
+}
+
+.green button.item, .green .item.button, .green .item.gutter {
+	background-color: #b081e9;
+	color: #111;
+}
+
+.green .summary .accolade, .green .summary .box.gallery, .green span.highlight.acco
+{
+	border-color: #86e981;
+}
+
+/* body.green
+{
+	border-color: #86e981;
+	background-color: #f8fcf2;
+} */
+
+.green .halve
+{
+	border-color:  #53cc71;
+}
+
+.green .summary a
+{
+	color: #86e981;
+}
+
+.green ::selection
+{
+	background-color: #86e981;
+	color: #000000;
+}
+
+.green .item .backdrop
+{
+	color: #48b263;
+}
+
+.purple .item, .purple .vis-item, .important .item.purple, .purple .summary th
+{
+	background-color: #E481E9;
+	border-color: #b975b9;
+	color: #111;
+}
+
+.purple .summary hr, .purple .do-underline, .item.purple .do-underline
+{
+	border-bottom-color: #b975b9;
+	text-decoration-color: #86e981;
+}
+
+.purple button.item, .purple .item.button, .purple .item.gutter {
+	background-color: #86e981;
+	color: #111;
+}
+
+.purple .summary .accolade, .purple .summary .box.gallery, .purple span.highlight.acco
+{
+	border-color: #b975b9;
+}
+
+/* body.purple
+{
+	border-color: #b975b9;
+	/* background-color: #e3cbe3;
+} */
+
+.purple .halve
+{
+	border-color:  #a346a3;
+}
+
+.purple .summary a
+{
+	color: #b975b9;
+}
+
+.purple ::selection
+{
+	background-color: #b975b9;
+	color: #ffffff;
+}
+
+.purple .item .backdrop
+{
+	color: #8c668c;
+}
+
+.orange .item, .orange .vis-item, .important .item.orange, .orange .summary th
+{
+	background-color: #e79463;
+	border-color: #ffaf95;
+	color: #111;
+}
+
+.orange .summary hr, .orange .do-underline, .item.orange .do-underline
+{
+	border-bottom-color: #ffaf95;
+	text-decoration-color: #63b6e7;
+}
+
+.orange button.item, .orange .item.button, .orange .item.gutter {
+	background-color: #63b6e7;
+	color: #111;
+}
+
+.orange .summary .accolade, .orange .summary .box.gallery, .orange span.highlight.acco
+{
+	border-color: #ffaf95;
+}
+
+/* body.orange
+{
+	border-color: #ffaf95;
+	background-color: #fdf8f5;
+} */
+
+.orange .halve
+{
+	border-color:  #f47e37;
+}
+
+.orange .summary a
+{
+	color: #ffaf95;
+}
+
+.orange ::selection
+{
+	background-color: #ffaf95;
+	color: #ffffff;
+}
+
+.orange .item .backdrop
+{
+	color: #b26b53;
+}
+
+.grey .item, .grey .vis-item, .important .item.grey, .grey .summary th
+{
+	background-color: #DCCABC;
+	border-color: #dcdabc;
+	color: #111;
+}
+
+.grey .summary hr, .grey .do-underline, .item.grey .do-underline
+{
+	border-bottom-color: #dcdabc;
+	text-decoration-color: #987fb8;
+}
+
+.grey button.item, .grey .item.button, .grey .item.gutter {
+	background-color: #987fb8;
+	color: #fff;
+}
+
+.grey .summary .accolade, .grey .summary .box.gallery, .grey span.highlight.acco
+{
+	border-color: #dcdabc;
+}
+
+/* body.grey
+{
+	border-color: #dcdabc;
+	background-color: #fbf9f8;
+} */
+
+.grey .halve
+{
+	border-color: #bfbfbf;
+}
+
+.grey .summary a
+{
+	color: #dcdabc;
+}
+
+.grey ::selection
+{
+	background-color: #dcdabc;
+	color: #000000;
+}
+
+.grey .item .backdrop
+{
+	color: #858585;
+}
+
+.yellow .item, .yellow .vis-item, .important .item.yellow, .yellow .summary th
+{
+	background-color: #ffff7f;
+	border-color: #E9E481;
+	color: #111;
+}
+
+.yellow .summary hr, .yellow .do-underline, .item.yellow .do-underline
+{
+	border-bottom-color: #e5e572;
+	text-decoration-color: #bfff7f;
+}
+
+.yellow button.item, .yellow .item.button, .yellow .item.gutter {
+	background-color: #bfff7f;
+	color: #111;
+}
+
+.yellow .summary .accolade, .yellow .summary .box.gallery, .yellow span.highlight.acco
+{
+	border-color: #e5e572;
+}
+
+/* body.yellow
+{
+	border-color: #e5e572;
+	background-color: #fffff2;
+} */
+
+.yellow .halve
+{
+	border-color: #ffff7f;
+}
+
+.yellow .summary a
+{
+	color: #e5e572;
+}
+
+.yellow ::selection
+{
+	background-color: #e5e572;
+	color: #000000;
+}
+
+.yellow .item .backdrop
+{
+	color: #b2b258;
+}
+
+.pink .item, .pink .vis-item, .important .item.pink, .pink .summary th
+{
+	background-color: #e981ba;
+	border-color: #e572e5;
+	color: #111;
+}
+
+.pink .summary hr, .pink .do-underline, .item.pink .do-underline
+{
+	border-bottom-color: #e572e5;
+	text-decoration-color: #81e9b0;
+}
+
+.pink button.item, .pink .item.button, .pink .item.gutter {
+	background-color: #81e9b0;
+	color: #111;
+}
+
+.pink .summary .accolade, .pink .summary .box.gallery, .pink span.highlight.acco
+{
+	border-color: #e572e5;
+}
+
+/* body.pink
+{
+	border-color: #e572e5;
+	background-color: #fff9f9;
+} */
+
+.pink .halve
+{
+	border-color:  #ff7fff;
+}
+
+.pink .summary a
+{
+	color: #e572e5;
+}
+
+.pink ::selection
+{
+	background-color: #e572e5;
+	color: #ffffff;
+}
+
+.pink .item .backdrop
+{
+	color: #b258b2;
+}

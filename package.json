@@ -14,31 +14,299 @@
   ],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "summarine.helloWorld",
-      "title": "Hello World"
-    }, {
-      "command": "summarine.sidePreview",
-      "title": "Summarine render",
-      "category": "menubar",
-      "icon": {
-            "light": "./assets/PreviewOnRightPane_16x.svg",
-            "dark": "./assets/PreviewOnRightPane_16x_dark.svg"
-       }
-    }]
+    "grammars": [
+      {
+        "scopeName": "summarine.injection",
+        "path": "./syntaxes/markdown.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown",
+          "source.gfm"
+        ]
+      }
+    ],
+    "themes": [
+      {
+        "label": "Summarine",
+        "uiTheme": "vs",
+        "path": "./themes/summarine.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "summarine.sidePreview",
+        "title": "Render and open in side panel",
+        "category": "Summarine",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "summarine.shiftLeft",
+        "title": "Shift lines to the left",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.shiftRight",
+        "title": "Shift lines to the right",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.helloWorld",
+        "title": "Hello World",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapWarn",
+        "title": "Wrap 'warn' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapInfo",
+        "title": "Wrap 'info' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapAccolade",
+        "title": "Wrap 'acco' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapAttributeValueStructure",
+        "title": "Wrap 'avs' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapBigTex",
+        "title": "Wrap 'bigtex' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapColumns",
+        "title": "Wrap 'columns' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapDefList",
+        "title": "Wrap 'deflist' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapEquation",
+        "title": "Wrap 'eq' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapExample",
+        "title": "Wrap 'example' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapExercise",
+        "title": "Wrap 'exercise' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapGallery",
+        "title": "Wrap 'gallery' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapGalleryPort",
+        "title": "Wrap 'gallery port' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapNetwork",
+        "title": "Wrap 'network' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapNoPrint",
+        "title": "Wrap 'noprint' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapReader",
+        "title": "Wrap 'reader' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapReaderWide",
+        "title": "Wrap 'reader wide' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapRewrite",
+        "title": "Wrap 'rewrite' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapSyntax",
+        "title": "Wrap 'syntax' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapWide",
+        "title": "Wrap 'wide' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapWideCenter",
+        "title": "Wrap 'widec' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapWideJustified",
+        "title": "Wrap 'widej' container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapTilde",
+        "title": "Wrap tilde",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.wrapMark",
+        "title": "Wrap mark",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.insertPage",
+        "title": "Insert page container",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.mathLettersConverter",
+        "title": "Convert letters to math letters",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.pasteImage",
+        "title": "Paste an image from the clipboard",
+        "category": "Summarine"
+      },
+      {
+        "command": "summarine.insertFromDisk",
+        "title": "Insert a resource from disk",
+        "category": "Summarine",
+        "icon": "$(folder-opened)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "summarine.sidePreview",
+          "group": "navigation@1"
+        },
+        {
+          "command": "summarine.insertFromDisk",
+          "group": "navigation@2"
+        }
+      ]
+    }
   },
+  "keybindings": [
+    {
+      "command": "summarine.shiftLeft",
+      "key": "ctrl+alt+left",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.shiftRight",
+      "key": "ctrl+alt+right",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapWarn",
+      "key": "ctrl+shift+m",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapInfo",
+      "key": "ctrl+shift+i",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapAccolade",
+      "key": "ctrl+shift+l",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapBigTex",
+      "key": "ctrl+shift+b",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapEquation",
+      "key": "ctrl+shift+q",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapExample",
+      "key": "ctrl+shift+x",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapGallery",
+      "key": "ctrl+shift+g",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapReader",
+      "key": "ctrl+shift+r",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapWide",
+      "key": "ctrl+shift+y",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapWideCenter",
+      "key": "ctrl+shift+c",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapTilde",
+      "key": "ctrl+=",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.wrapMark",
+      "key": "ctrl+shift+=",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.insertPage",
+      "key": "ctrl+shift+o",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.mathLettersConverter",
+      "key": "ctrl+m",
+      "when": "editorTextFocus"
+    },
+    {
+      "command": "summarine.pasteImage",
+      "key": "ctrl+alt+v",
+      "when": "editorTextFocus"
+    }
+  ],
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.93.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
-    "eslint": "^9.9.1",
+    "@types/vscode": "^1.93.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.1.1"
+  },
+  "dependencies": {
+    "is-wsl": "^2.2.0",
+    "twing": "^5.2.2",
+    "eslint": "^9.9.1",
     "fs-extra": "^11.1.1",
     "katex": "^0.16.4",
     "markdown-it": "^13.0.1",
@@ -49,7 +317,6 @@
     "markdown-it-multimd-table": "^4.2.0",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
-    "markdown-it-texmath": "^1.0.0",
-    "twing": "^5.1.2"
+    "markdown-it-texmath": "^1.0.0"
   }
 }

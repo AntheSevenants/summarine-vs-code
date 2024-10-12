@@ -1,7 +1,10 @@
+//import { wrap } from 'module';
+
 const fs = require('fs');
 const path = require('path');
 const Tools = require("./tools");
 const Templating = require("./templating");
+const Typographer = require("./typographer");
 
 const MarkdownIt = require('markdown-it');
 const MarkdownItSub = require('markdown-it-sub');
@@ -13,11 +16,15 @@ const MarkdownItMultiMdTable = require('markdown-it-multimd-table');
 const MarkdownItMark = require('markdown-it-mark');
 const tm = require('markdown-it-texmath');
 
+const settingsPath = path.join(__dirname, 'settings.json');
+const settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+
 const md = new MarkdownIt({
     html: true,
     linkify: true,
     typographer: true
-}).use(MarkdownItSub)
+}).disable(["lheading", "replacements"])
+    .use(MarkdownItSub)
     .use(MarkdownItSup)
     .use(MarkdownItDeflist)
     .use(MarkdownItEmoji)
@@ -30,17 +37,21 @@ const md = new MarkdownIt({
         katexOptions: { trust: true }
     });
 
+// md.core.ruler.at('replacements', (state) => {
+//     Typographer.replace(state, settings);
+// })
+
 const Regexes = {
-    "IMAGE": /\(img\$(.{4})\)/g,
-    "IMAGE_TEST": ["\\(img\\$", "\\)"],
-    "AUDIO": /\$audio=(.{4})\$/g,
+    //"IMAGE": /\(img\$(.{4})\)/g,
+    //"IMAGE_TEST": ["\\(img\\$", "\\)"],
+    "AUDIO": /\$audio=.*?\$/g,
     "AUDIO_TEST": ["\\$audio=", "\\$"],
     "VIDEOLOOP": /\$videoloop=(.*)\$/g,
     "VIDEO": /\$video=(.*)\$/g,
     "TOOLTIP": /\$tt=(.*?)\$(.*?)\$\/tt\$/g,
     "LEGACY_TABLE": /^(\|[-]+\|)$/gm,
     "LEGACY_LAYOUT": /<\/div>\n([-]+)\n/g,
-	"PAGE": /\$p=(.*?)\$/g,
+    "PAGE": /\$p=(.*?)\$/g,
 }
 
 const Colours = {
@@ -59,16 +70,9 @@ function readResource(resourcesFolderPath, resourceId) {
     return fs.readFileSync(resourcePath, { encoding: "utf8" });
 }
 
-async function render(coursePath, filename, settings) {
-    const resourcesFolderPath = `${coursePath}/.resources/`;
-    const courseMetaPath = `${coursePath}/meta.json`;
-    const filePath = `${coursePath}/${filename}/`;
-    const fileContentPath = `${filePath}/content.md`;
-
-    let markdown = await fs.readFileSync(fileContentPath, { encoding: "utf8" });
-    const courseMeta = JSON.parse(await fs.readFileSync(courseMetaPath, { encoding: "utf8" }));
-    const currentColour = courseMeta["colour"];
-    const currentCourse = courseMeta["title"];
+async function render(markdownText, filePath, settings) {
+    //let markdown = await fs.readFileSync(filePath, { encoding: "utf8" });
+    let markdown = markdownText;
 
     for (let container in settings.containers) {
         markdown = markdown.replace(new RegExp("\\$" + container + "\\$", "g"), settings.containers[container][0] + "\n \n ");
@@ -86,10 +90,10 @@ async function render(coursePath, filename, settings) {
     /*
         Resource replacements
      */
-    markdown = markdown.replace(Regexes.IMAGE,
-        (match, captureGroup) => { return "(" + readResource(resourcesFolderPath, captureGroup) + ")" });
+    // markdown = markdown.replace(Regexes.IMAGE,
+    //     (match, captureGroup) => { return "(" + readResource(resourcesPath, captureGroup) + ")" });
     markdown = markdown.replace(Regexes.AUDIO,
-        (match, captureGroup) => { return Tools.generateAudio(this.blobs[captureGroup]); });
+        (match, captureGroup) => { return Tools.generateAudio(captureGroup); });
     markdown = markdown.replace(Regexes.VIDEOLOOP,
         (match, captureGroup) => { return Tools.generateVideo(captureGroup, true); });
     markdown = markdown.replace(Regexes.VIDEO,
@@ -98,20 +102,21 @@ async function render(coursePath, filename, settings) {
         (match, title, text) => { return "<abbr title=\"" + title + "\">" + text + "</abbr>" });
 
     let pageReplacementCount = 0;
-	markdown = markdown.replace(Regexes.PAGE,
-			(match, pageNumber) => {
-				let prefix = "";
-				if (pageReplacementCount != 0) {
-					prefix = "</div></div>"
-				}
+    markdown = markdown.replace(Regexes.PAGE,
+        (match, pageNumber) => {
+            let prefix = "";
+            if (pageReplacementCount != 0) {
+                prefix = "</div></div>"
+            }
 
-				pageReplacementCount++;
+            pageReplacementCount++;
 
-				return `${prefix}<div class=\"page-container\"><div class=\"page-page\">p. ${pageNumber}</div><div class=\"page-content\">` });
+            return `${prefix}<div class=\"page-container\"><div class=\"page-page\">p. ${pageNumber}</div><div class=\"page-content\">`
+        });
 
-	if (pageReplacementCount > 0) {
-		markdown = markdown + "\n\n</div></div>";
-	}
+    if (pageReplacementCount > 0) {
+        markdown = markdown + "\n\n</div></div>";
+    }
 
     /* Fix legacy tables by replacing single |---| with a flippin lot of them! - because that's valid markdown right? */
     markdown = markdown.replace(Regexes.LEGACY_TABLE,
@@ -138,15 +143,23 @@ async function render(coursePath, filename, settings) {
             settings.translations[i][1]);
     }
 
-    /* 
-        Dynamic translations
-    */
-    markdown = markdown.replace(/\$colour/g, Colours[currentColour][0]);
-
     markdown = md.render(markdown);
-    markdown = await Templating.wrapTemplate(markdown, currentCourse, currentColour);
 
     return markdown;
 }
 
-module.exports = { render };
+async function wrapTemplate(html, metaPath) {
+    const courseMeta = JSON.parse(await fs.readFileSync(metaPath, { encoding: "utf8" }));
+    const currentColour = courseMeta["colour"];
+    const currentCourse = courseMeta["title"];
+    /* 
+        Dynamic translations
+    */
+    html = html.replace(/\$colour/g, Colours[currentColour][0]);
+
+    html = await Templating.wrapTemplate(html, currentCourse, currentColour);
+
+    return html;
+}
+
+module.exports = { render, wrapTemplate };

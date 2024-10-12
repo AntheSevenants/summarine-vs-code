@@ -38,5 +38,15 @@
 	border-color:transparent;
 }
 
+:root {
+    scroll-behavior: auto !important;
+}
+
+#segment_overflow {
+    height: 100%;
+    width: 100%;
+}
+
 body {
+    background-color: #F6F8FA !important;
 }

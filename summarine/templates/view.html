@@ -5,6 +5,27 @@
 </div>
 
 <script>
+    class UI {
+        static scrolledToBottom(overflowElement) {
+            let scrollMax = UI.scrollBottomMax(overflowElement);
+            return (Math.ceil(overflowElement.scrollTop) >= scrollMax - 10 || Math.floor(overflowElement.scrollTop) >= scrollMax - 10);
+        }
+
+        static scrollBottomMax(overflowElement) {
+            /* for VS Code: replace offsetHeight with clientHeight !!! */
+            return Math.round(overflowElement.scrollHeight - overflowElement.clientHeight);
+        }
+
+
+        static scrollToBottom(overflowElement) {
+            overflowElement.scrollTop = UI.scrollBottomMax(overflowElement);
+        }
+
+        static scrollToPosition(overflowElement, scrollPosition) {
+            overflowElement.scrollTop = scrollPosition;
+        }
+    }
+
     /*
         Summarine allows you to prefix a list item with either => or <-> which translate to the fancy
         arrows you see below. Then, the following code sets their bullet to this symbol.
@@ -75,10 +96,59 @@
         });
     }
 
+    function doAdapt(targetElement) {
+        adaptList(targetElement);
+        adaptCode(targetElement);
+        adaptHeaders(targetElement);
+    }
+
+    /* 
+        Code for shifting along the scroll bar when new elements are added.
+        I don't even know how or why or what. I just copy-pasted it from the previous
+        version please don't shoot me.
+
+        2019-02-23: I have added 'overflowElement' to the parameters. The elementoverflowing is possibly not the element whereto the markdown is rendered (because of the new pdf page)
+
+        2024-10-06: here we are again 🥲 I copied this code into the VS Code extension. Viva Summarine!
+    */
+    function updateHtml(htmlContent) {
+        overflowElement = document.documentElement;
+
+        if (UI.scrolledToBottom(overflowElement)) {
+            var scroll = true;
+        }
+        console.log(scroll);
+        let scrollPosition = overflowElement.scrollTop;
+
+        /* Actually push the rendered HTML to the element */
+        renderedViewer.innerHTML = htmlContent
+
+        doAdapt(renderedViewer);
+
+        /* 
+            If the scroll bar was previously at the bottom before we added the new HTML,
+            put it there again.
+        */
+        if (scroll) {
+            UI.scrollToBottom(overflowElement);
+        }
+        else {
+            UI.scrollToPosition(overflowElement, scrollPosition);
+        }
+    }
+
     const renderedViewer = document.querySelector("#segment_renderedViewer");
-    adaptList(renderedViewer);
-    adaptCode(renderedViewer);
-    adaptHeaders(renderedViewer);
+    doAdapt(renderedViewer);
+
+    window.addEventListener('message', event => {
+        const message = event.data; // The JSON data our extension sent
+
+        switch (message.command) {
+            case 'update':
+                updateHtml(message.content);
+                break;
+        }
+    });
 </script>
 </div>
 {% endblock %}
