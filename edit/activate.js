@@ -5,6 +5,7 @@ const rendering = require("../edit/rendering");
 const manipulate = require("../edit/manipulate");
 const Tools = require("../edit/tools");
 const Paste = require("../edit/paste");
+const Clam = require("../edit/clam");
 
 const RENDER_TIMEOUT_DURATION = 500 /* in ms */
 let renderTimeout = false;
@@ -127,4 +128,16 @@ function insertFromDisk(context) {
 		vscode.commands.registerCommand('summarine.insertFromDisk', Paste.insertFromDisk));
 }
 
-module.exports = { sidePreview, wrappers, paste, insertFromDisk };
+function activateClam(context) {
+	vscode.commands.registerCommand('summarine.activateClam', async () => {
+       Clam.activateClam();
+    });
+}
+
+function applyClam(context) {
+	vscode.commands.registerCommand('summarine.applyClam', async () => {
+		Clam.applyClam();
+	 });
+}
+
+module.exports = { sidePreview, wrappers, paste, insertFromDisk, activateClam, applyClam };

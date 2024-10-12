@@ -22,6 +22,8 @@ function activate(context) {
 	activator.wrappers(context);
 	activator.paste(context);
 	activator.insertFromDisk(context);
+	activator.applyClam(context);
+	activator.activateClam(context);
 
 	let shiftLeft = vscode.commands.registerCommand('summarine.shiftLeft', () => manipulate.lineShifter("left"));
 	let shiftRight = vscode.commands.registerCommand('summarine.shiftRight', () => manipulate.lineShifter("right"));

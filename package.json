@@ -188,6 +188,18 @@
         "title": "Insert a resource from disk",
         "category": "Summarine",
         "icon": "$(folder-opened)"
+      },
+      {
+        "command": "summarine.activateClam",
+        "title": "Enter the two parts of a clam",
+        "category": "Summarine",
+        "icon": "$(bracket)"
+      },
+      {
+        "command": "summarine.applyClam",
+        "title": "Wrap the selected text in the defined clam, or insert it",
+        "category": "Summarine",
+        "icon": "$(bracket-dot)"
       }
     ],
     "menus": {
