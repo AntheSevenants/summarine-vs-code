@@ -109,9 +109,12 @@ async function render(markdownText, filePath, settings) {
                 prefix = "</div></div>"
             }
 
+            let allNumbers = /^[\d-,;]+$/.test(pageNumber);
+            let pagePrefix = allNumbers ? "p. " : "";
+
             pageReplacementCount++;
 
-            return `${prefix}<div class=\"page-container\"><div class=\"page-page\">p. ${pageNumber}</div><div class=\"page-content\">`
+            return `${prefix}<div class=\"page-container\"><div class=\"page-page\">${pagePrefix}${pageNumber}</div><div class=\"page-content\">`
         });
 
     if (pageReplacementCount > 0) {
