@@ -2,7 +2,9 @@
   "name": "summarine",
   "displayName": "Summarine",
   "description": "Take notes like it's 2017!",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "repository": "https://github.com/AntheSevenants/summarine-vs-code",
+  "icon": "assets/summarine-reference.png",
   "engines": {
     "vscode": "^1.93.0"
   },
