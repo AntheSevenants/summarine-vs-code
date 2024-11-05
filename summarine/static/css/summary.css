@@ -112,11 +112,15 @@ ol {
 .summary ul li:before {
 	font-family: "SegoeSymbol";
 
-	content: "\21FE";
+	content: "\2022";
 	display: block;
 	width: 1.2rem;
 
 	float: left;
+}
+
+.anthe .summary ul li:before {
+	content: "\21FE";
 }
 
 .summary ul li.conclusion::before {
