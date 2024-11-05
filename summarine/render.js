@@ -155,12 +155,18 @@ async function wrapTemplate(html, metaPath) {
     const courseMeta = JSON.parse(await fs.readFileSync(metaPath, { encoding: "utf8" }));
     const currentColour = courseMeta["colour"];
     const currentCourse = courseMeta["title"];
+    let antheLayout = false;
+
+    if (courseMeta["anthe"] !== undefined) {
+        antheLayout = true;
+    }
+
     /* 
         Dynamic translations
     */
     html = html.replace(/\$colour/g, Colours[currentColour][0]);
 
-    html = await Templating.wrapTemplate(html, currentCourse, currentColour);
+    html = await Templating.wrapTemplate(html, currentCourse, currentColour, antheLayout);
 
     return html;
 }
