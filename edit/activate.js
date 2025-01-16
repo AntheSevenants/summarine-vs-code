@@ -31,6 +31,7 @@ function sidePreview(context) {
 
 		// Get the active text editor
 		const editor = vscode.window.activeTextEditor;
+		const colorTheme = vscode.window.activeColorTheme.kind == vscode.ColorThemeKind.Light ? "light" : "dark";
 
 		if (editor) {
 			const doc = editor.document;
@@ -47,7 +48,7 @@ function sidePreview(context) {
 				let markdownText = editor.document.getText();
 
 				// Set the initial HTML content
-				rendering.setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath);
+				rendering.setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme);
 
 				// Update content when the document changes
 				const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(event => {
@@ -57,7 +58,7 @@ function sidePreview(context) {
 
 						renderTimeout = setTimeout(() => {
 							let markdownText = editor.document.getText();
-							rendering.setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, true);
+							rendering.setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme, true);
 						}, RENDER_TIMEOUT_DURATION);
 					}
 				});

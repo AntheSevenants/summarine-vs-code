@@ -9,7 +9,7 @@ const tools = require("../edit/tools");
  * @param {string} coursePath The Markdown text to convert.
  * @param {string} fileName The Markdown text to convert.
  */
-function setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, update = false) {
+function setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme, update = false) {
 	// Construct the full path to the "settings.json" file inside the "summarine" folder in the extension directory
 	const extensionPath = context.extensionPath;
 	const settingsPath = path.join(extensionPath, '/summarine', 'settings.json');
@@ -28,7 +28,7 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 			htmlContent = tools.fixLinks(context, htmlContent, panel.webview, resourcesPath, true);
 
 			if (!update) {
-				summarine.wrapTemplate(htmlContent, metaPath).then(htmlContent => {
+				summarine.wrapTemplate(htmlContent, metaPath, colorTheme).then(htmlContent => {
 					const documentPath = path.join(extensionPath, 'summarine', 'static');
 					htmlContent = tools.fixLinks(context, htmlContent, panel.webview, documentPath);
 					panel.webview.html = htmlContent;

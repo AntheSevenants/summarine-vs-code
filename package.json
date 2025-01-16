@@ -34,7 +34,7 @@
       },
       {
         "label": "Summarine (dark mode)",
-        "uiTheme": "vs",
+        "uiTheme": "vs-dark",
         "path": "./themes/summarine-dark.json"
       }
     ],

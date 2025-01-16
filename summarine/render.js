@@ -151,7 +151,7 @@ async function render(markdownText, filePath, settings) {
     return markdown;
 }
 
-async function wrapTemplate(html, metaPath) {
+async function wrapTemplate(html, metaPath, colorTheme) {
     const courseMeta = JSON.parse(await fs.readFileSync(metaPath, { encoding: "utf8" }));
     const currentColour = courseMeta["colour"];
     const currentCourse = courseMeta["title"];
@@ -166,7 +166,7 @@ async function wrapTemplate(html, metaPath) {
     */
     html = html.replace(/\$colour/g, Colours[currentColour][0]);
 
-    html = await Templating.wrapTemplate(html, currentCourse, currentColour, antheLayout);
+    html = await Templating.wrapTemplate(html, currentCourse, currentColour, colorTheme, antheLayout);
 
     return html;
 }

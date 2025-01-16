@@ -47,6 +47,13 @@
     width: 100%;
 }
 
-body {
+body.light {
     background-color: #F6F8FA !important;
+    color: #1111;
 }
+
+body.dark {
+    background-color: #252526 !important;
+    color: #ffffff;
+}
+
