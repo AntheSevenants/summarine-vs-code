@@ -831,7 +831,7 @@ span.highlight.warn {
 	color: grey;
 }
 
-.dark .summary .page-page {
+.dark .summary .page-page, .dark .summary table caption {
 	color: #ffffff;
 }
 
