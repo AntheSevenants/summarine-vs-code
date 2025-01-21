@@ -835,6 +835,11 @@ span.highlight.warn {
 	color: #ffffff;
 }
 
+.dark .summary .box.avs,
+.dark span.highlight.avs {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
 .summary .page-content {
 	flex-grow: 1;
 	display: flex;
