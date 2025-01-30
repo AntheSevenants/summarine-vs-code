@@ -92,7 +92,7 @@
 
             //headerPrefix = headerPrefix.substring(0, headerPrefix.length - 1);
 
-            header.textContent = `${headerPrefix} ${header.textContent}`;
+            header.innerHTML = `<span class="headerPrefix">${headerPrefix}</span> <span class="headerText">${header.textContent}</span>`;
         });
     }
 
