@@ -149,6 +149,17 @@
                 break;
         }
     });
+
+    window.addEventListener('click', (event) => {
+        if (event.target.tagName != "SPAN") {
+            return;
+        }
+        
+        if (["H1", "H2", "H3", "H4", "H5", "H6"].includes(event.target.parentElement.tagName)) {
+            const headingText = event.target.innerText;
+            vscode.postMessage({ command: 'insertHeading', text: headingText });
+        }
+    });
 </script>
 </div>
 {% endblock %}

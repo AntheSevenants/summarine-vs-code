@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const summarine = require("../summarine/render");
 const tools = require("../edit/tools");
+const manipulate = require("../edit/manipulate");
 
 /**
  * Returns HTML content for the webview.
@@ -21,6 +22,7 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 		}
 
 		const friendlyName = path.parse(filePath).name;
+		const directoryName = path.basename(path.dirname(filePath));
 		panel.title = friendlyName;
 
 		settings = JSON.parse(settings);
@@ -35,6 +37,20 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 				});
 			} else {
 				panel.webview.postMessage({ "command": "update", "content": htmlContent });
+			}
+		});
+
+		panel.webview.onDidReceiveMessage(message => {
+			if (message.command === 'insertHeading') {
+				let toInsert = `${friendlyName}#${message.text}`;
+
+				if (/^[\d]+-(.*)/.test(friendlyName)) {
+					toInsert = `${directoryName}/${toInsert}`;
+				}
+
+				toInsert = `[[${toInsert}]]`;
+
+				manipulate.insertTextAtCursor(toInsert);
 			}
 		});
 	});

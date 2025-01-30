@@ -1,6 +1,15 @@
 
 const vscode = require('vscode');
 
+let lastActiveEditor = null;
+
+// Track the last active text editor
+vscode.window.onDidChangeActiveTextEditor(editor => {
+    if (editor) {
+        lastActiveEditor = editor;
+    }
+});
+
 // Generalized wrapping function
 function wrapWithTags(startTag, endTag, inline = false, offset = 0) {
 	const editor = vscode.window.activeTextEditor;
@@ -34,6 +43,17 @@ function wrapWithTags(startTag, endTag, inline = false, offset = 0) {
 			}
 		});
 	}
+}
+
+function insertTextAtCursor(text) {
+    if (!lastActiveEditor) {
+        vscode.window.showErrorMessage('No previously active editor found.');
+        return;
+    }
+
+    lastActiveEditor.edit(editBuilder => {
+        editBuilder.insert(lastActiveEditor.selection.active, text);
+    });
 }
 
 // Shift line level from left to right
@@ -78,4 +98,4 @@ function lineShifter(direction) {
 	});
 }
 
-module.exports = { wrapWithTags, lineShifter };
+module.exports = { wrapWithTags, lineShifter, insertTextAtCursor };
