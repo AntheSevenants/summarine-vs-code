@@ -23,6 +23,8 @@ function sidePreview(context) {
 			vscode.ViewColumn.Beside, // Editor column to show the new webview panel in.
 			{
 				enableScripts: true,
+				retainContextWhenHidden: true,
+				enableFindWidget: true,
 				// localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, 'summarine'),
 				// vscode.Uri.joinPath(context.extensionUri, 'summarine', 'static'),
 				// ]
