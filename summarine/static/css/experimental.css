@@ -1,0 +1,127 @@
+.summary * {
+    line-height: 1.8rem;
+}
+
+.summary ol > li::marker {
+  font-weight: bold;
+}
+
+/* .summary ol {
+    list-style-type: none;
+    counter-reset: item;
+}
+
+.summary ol li {
+    position: relative;
+}
+
+.summary ol li::before {
+    content: counter(item) "";
+    counter-increment: item;
+    position: absolute;
+    left: -1.5rem;
+    
+    top: 0.4rem;
+    
+    width: 1rem;
+    height: 1rem;
+    
+    font-size: 0.8rem;
+    
+    border: 1px solid;
+    border-color: #fff;
+    border-radius: 50%;
+    
+    text-align: center;
+    line-height: 1rem;
+    
+    font-weight: normal;
+} */
+
+.anthe .summary p,
+.anthe .summary ul,
+.anthe .summary ol,
+.anthe .summary .accolade p,
+.anthe .summary .accolade ul,
+.anthe .summary .accolade ol {
+    width: 100%;
+}
+
+.anthe .summary p+ul {
+    margin-top: 0em;
+    margin-left: 1em;
+}
+
+.anthe .summary ul li:before {
+    content: "\21b3";
+    border: none;
+}
+
+.anthe .summary .wide p+ul {
+    margin-top: 1em;
+}
+
+.summary li {
+    margin-bottom: 0.25em;
+}
+
+.summary .box.reader {
+    font-size: 1rem;
+    padding: 1em 1.5em 1em 1.5em;
+}
+
+.anthe .summary .box p+ul,
+.anthe .summary table p+ul,
+.anthe .summary .wide p+ul {
+    margin-top: 1em;
+}
+
+.anthe .summary .box ul,
+.anthe .summary .box ol {
+    padding-left: 1em;
+}
+
+.summary .box ul li:before,
+.summary table ul li:before,
+.summary .wide ul li:before {
+    content: '\2022';
+    border: none;
+}
+
+/* 
+.summary eqn {
+    margin-top: 1.5em !important;
+}
+
+.summary .box {
+    margin-top: 1.5em;
+}
+
+.summary .columns {
+    margin-bottom: 1.5em;
+}
+
+.summary .item.page {
+	margin-top: 1.5em;
+} */
+
+/* .summary p,
+.summary audio,
+.summary pre,
+.summary table,
+.summary hr,
+.summary dl,
+.summary h1,
+.summary h2,
+.summary h4,
+.summary h5,
+.summary h6,
+.summary .wide,
+.summary .widep,
+.summary .accolade {
+    margin-top: 1.5rem;
+}
+
+.summary table hr {
+    margin-bottom: 1.5rem;
+} */

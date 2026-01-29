@@ -1,3 +1,4 @@
+const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const summarine = require("../summarine/render");
@@ -15,6 +16,8 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 	const extensionPath = context.extensionPath;
 	const settingsPath = path.join(extensionPath, '/summarine', 'settings.json');
 
+	const experimentalCSS = vscode.workspace.getConfiguration('summarine').get('experimentalCSS');
+
 	fs.readFile(settingsPath, 'utf8', (err, settings) => {
 		if (err) {
 			console.error(err);
@@ -30,7 +33,7 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 			htmlContent = tools.fixLinks(context, htmlContent, panel.webview, resourcesPath, true);
 
 			if (!update) {
-				summarine.wrapTemplate(htmlContent, metaPath, colorTheme).then(htmlContent => {
+				summarine.wrapTemplate(htmlContent, metaPath, colorTheme, experimentalCSS).then(htmlContent => {
 					const documentPath = path.join(extensionPath, 'summarine', 'static');
 					htmlContent = tools.fixLinks(context, htmlContent, panel.webview, documentPath);
 					panel.webview.html = htmlContent;

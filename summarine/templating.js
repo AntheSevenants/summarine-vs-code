@@ -5,13 +5,14 @@ const templatesPath = path.join(__dirname, 'templates');
 let loader = new TwingLoaderFilesystem(templatesPath);
 let twing = new TwingEnvironment(loader);
 
-async function wrapTemplate(htmlContent, currentCourse, currentColour, colorTheme, antheLayout) {
+async function wrapTemplate(htmlContent, currentCourse, currentColour, colorTheme, antheLayout, experimentalCSS) {
     return twing.render('view.html', {
         markdown: htmlContent,
         color: currentColour,
         course: currentCourse,
         colorTheme: colorTheme,
-        anthe: antheLayout
+        anthe: antheLayout,
+        experimental: experimentalCSS
     }).then((output) => {
         return output;
     });

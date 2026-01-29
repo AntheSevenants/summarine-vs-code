@@ -26,6 +26,16 @@
         ]
       }
     ],
+    "configuration": {
+      "title": "Summarine",
+      "properties": {
+        "summarine.experimentalCSS": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable experimental CSS features"
+        }
+      }
+    },
     "themes": [
       {
         "label": "Summarine",
