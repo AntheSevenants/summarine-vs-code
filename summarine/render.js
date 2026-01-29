@@ -78,6 +78,9 @@ function readResource(resourcesFolderPath, resourceId) {
 }
 
 async function render(markdownText, filePath, settings) {
+    // Overwrite current frontmatter
+    currentFrontMatter = {};
+
     //let markdown = await fs.readFileSync(filePath, { encoding: "utf8" });
     let markdown = markdownText;
 
@@ -160,7 +163,7 @@ async function render(markdownText, filePath, settings) {
     return markdown;
 }
 
-async function wrapTemplate(html, metaPath, colorTheme) {
+async function wrapTemplate(html, metaPath, colorTheme, experimentalCSS) {
     const courseMeta = JSON.parse(await fs.readFileSync(metaPath, { encoding: "utf8" }));
     const currentColour = courseMeta["colour"];
     const currentCourse = courseMeta["title"];
@@ -170,8 +173,10 @@ async function wrapTemplate(html, metaPath, colorTheme) {
         antheLayout = true;
     }
 
-    if (!currentFrontMatter["anthe"]) {
-        antheLayout = false;
+    if (currentFrontMatter["anthe"] !== undefined) {
+        if (!currentFrontMatter["anthe"]) {
+            antheLayout = false;
+        }
     }
 
     /* 
@@ -179,7 +184,7 @@ async function wrapTemplate(html, metaPath, colorTheme) {
     */
     html = html.replace(/\$colour/g, Colours[currentColour][0]);
 
-    html = await Templating.wrapTemplate(html, currentCourse, currentColour, colorTheme, antheLayout);
+    html = await Templating.wrapTemplate(html, currentCourse, currentColour, colorTheme, antheLayout, experimentalCSS);
 
     return html;
 }
