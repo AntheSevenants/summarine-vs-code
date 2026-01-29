@@ -833,6 +833,11 @@ span.highlight.warn {
 	color: grey;
 }
 
+.summary .page-page * {
+	display: inline;
+	width: 100%;
+}
+
 .dark .summary .page-page, .dark .summary table caption {
 	color: #ffffff;
 }

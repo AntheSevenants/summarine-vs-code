@@ -48,6 +48,7 @@ const Regexes = {
     "AUDIO_TEST": ["\\$audio=", "\\$"],
     "VIDEOLOOP": /\$videoloop=(.*)\$/g,
     "VIDEO": /\$video=(.*)\$/g,
+    "WIKILINK": /\[\[(.+?)\]\]/g,
     "TOOLTIP": /\$tt=(.*?)\$(.*?)\$\/tt\$/g,
     "LEGACY_TABLE": /^(\|[-]+\|)$/gm,
     "LEGACY_LAYOUT": /<\/div>\n([-]+)\n/g,
@@ -98,6 +99,8 @@ async function render(markdownText, filePath, settings) {
         (match, captureGroup) => { return Tools.generateVideo(captureGroup, true); });
     markdown = markdown.replace(Regexes.VIDEO,
         (match, captureGroup) => { return Tools.generateVideo(captureGroup); });
+    markdown = markdown.replace(Regexes.WIKILINK,
+        (match, captureGroup) => { return Tools.generateWikiLink(captureGroup); });
     markdown = markdown.replace(Regexes.TOOLTIP,
         (match, title, text) => { return "<abbr title=\"" + title + "\">" + text + "</abbr>" });
 
@@ -114,7 +117,7 @@ async function render(markdownText, filePath, settings) {
 
             pageReplacementCount++;
 
-            return `${prefix}<div class=\"page-container\"><div class=\"page-page\">${pagePrefix}${pageNumber}</div><div class=\"page-content\">`
+            return `${prefix}<div class=\"page-container\"><div class=\"page-page\">\n\n${pagePrefix}${pageNumber}\n\n</div><div class=\"page-content\">`
         });
 
     if (pageReplacementCount > 0) {
