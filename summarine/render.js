@@ -14,10 +14,15 @@ const MarkdownItEmoji = require('markdown-it-emoji');
 const MarkdownItAbbr = require('markdown-it-abbr');
 const MarkdownItMultiMdTable = require('markdown-it-multimd-table');
 const MarkdownItMark = require('markdown-it-mark');
+const MarkdownItFrontMatter = require('markdown-it-front-matter');
 const tm = require('markdown-it-texmath');
+
+const yaml = require('yaml');
 
 const settingsPath = path.join(__dirname, 'settings.json');
 const settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+
+let currentFrontMatter = {};
 
 const md = new MarkdownIt({
     html: true,
@@ -31,6 +36,7 @@ const md = new MarkdownIt({
     .use(MarkdownItAbbr)
     .use(MarkdownItMultiMdTable, { multiline: true, rowspan: true })
     .use(MarkdownItMark)
+    .use(MarkdownItFrontMatter, (frontmatter) => { currentFrontMatter = yaml.parse(frontmatter); })
     .use(tm, {
         engine: require('katex'),
         delimiters: 'dollars',
@@ -162,6 +168,10 @@ async function wrapTemplate(html, metaPath, colorTheme) {
 
     if (courseMeta["anthe"] !== undefined) {
         antheLayout = true;
+    }
+
+    if (!currentFrontMatter["anthe"]) {
+        antheLayout = false;
     }
 
     /* 
