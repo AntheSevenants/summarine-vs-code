@@ -56,7 +56,7 @@
 }
 
 .anthe .summary ul,
-ol {
+.anthe .summary ol {
 	width: 65%;
 }
 
@@ -105,6 +105,11 @@ ol {
 
 .summary ol li ol {
 	text-indent: 0;
+}
+
+.summary ul li ol li:before,
+.summary .wide ul li ol li:before  {
+	content: '';
 }
 
 .summary ul li {}
@@ -822,7 +827,7 @@ span.highlight.warn {
 	width: 10%;
 
 	padding-top: 0.5em;
-	margin-top: 0.5em;
+	margin-top: 1em;
 	margin-left: 1em;
 
 	border-radius: 15px;
