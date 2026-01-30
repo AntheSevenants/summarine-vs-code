@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const path = require('path');
+const fs = require('fs');
 
 const rendering = require("../edit/rendering");
 const manipulate = require("../edit/manipulate");
@@ -22,7 +23,10 @@ function getActiveEditorGroupIndex() {
 }
 
 function activeEditorReliable() {
-	return vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path == vscode.window.activeTextEditor.document.fileName;
+	const tabGroupPath = path.parse(vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path).name;
+	const editorPath = path.parse(vscode.window.activeTextEditor.document.fileName).name;
+
+	return tabGroupPath == editorPath;
 }
 
 function sidePreview(context) {

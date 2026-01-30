@@ -90,10 +90,13 @@ function doRender(context, panelID = null, passive = true) {
                     clearTimeout(renderTimeout);
 
                     renderTimeout = setTimeout(() => {
-                        filePath = vscode.window.activeTextEditor.document.uri.fsPath;
-                        // console.log(filePath);
-                        // console.log(vscode.window.activeTextEditor.document);
-                        updateWebview(context, panel, vscode.window.activeTextEditor, filePath, metaPath, resourcesPath, colorTheme, true);
+                        if (vscode.window.activeTextEditor !== undefined) {
+                            filePath = vscode.window.activeTextEditor.document.uri.fsPath;
+                            
+                            // console.log(filePath);
+                            // console.log(vscode.window.activeTextEditor.document);
+                            updateWebview(context, panel, vscode.window.activeTextEditor, filePath, metaPath, resourcesPath, colorTheme, true);
+                        }
                     }, RENDER_TIMEOUT_DURATION);
                 }
             });
