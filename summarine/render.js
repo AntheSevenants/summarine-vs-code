@@ -1,5 +1,7 @@
 //import { wrap } from 'module';
 
+const vscode = require('vscode');
+
 const fs = require('fs');
 const path = require('path');
 const Tools = require("./tools");
@@ -36,7 +38,14 @@ const md = new MarkdownIt({
     .use(MarkdownItAbbr)
     .use(MarkdownItMultiMdTable, { multiline: true, rowspan: true })
     .use(MarkdownItMark)
-    .use(MarkdownItFrontMatter, (frontmatter) => { currentFrontMatter = yaml.parse(frontmatter); })
+    .use(MarkdownItFrontMatter, (frontmatter) => { 
+        try {
+            frontmatter = frontmatter.replace(/(:\s*)(@[^ \n]+)/g, '$1"$2"');
+            currentFrontMatter = yaml.parse(frontmatter);
+        } catch ({ name, message }) {
+            vscode.window.showErrorMessage(`YAML frontmatter parse error:\n${message}`);
+        }
+    })
     .use(tm, {
         engine: require('katex'),
         delimiters: 'dollars',
