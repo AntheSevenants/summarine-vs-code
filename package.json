@@ -166,6 +166,11 @@
         "category": "Summarine"
       },
       {
+        "command": "summarine.wrapRelaxed",
+        "title": "Wrap 'relaxed' container",
+        "category": "Summarine"
+      },
+      {
         "command": "summarine.wrapWideCenter",
         "title": "Wrap 'widec' container",
         "category": "Summarine"

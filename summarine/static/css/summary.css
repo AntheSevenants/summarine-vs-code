@@ -25,8 +25,16 @@
 	width: 100%;
 
 	font-size: 1rem;
-	line-height: 1.5rem;
+	line-height: 1.8rem;
 	letter-spacing: 0.5px;
+}
+
+.summary ol > li::marker {
+  font-weight: bold;
+}
+
+.summary li {
+    margin-bottom: 0.25em;
 }
 
 .summary>*:first-child {
@@ -56,7 +64,7 @@
 }
 
 .anthe .summary ul,
-.anthe .summary ol {
+ol {
 	width: 65%;
 }
 
@@ -398,11 +406,9 @@ th {
 	text-align: justify;
 
 	border-color: #b2b2a0;
-
-	font-size: 0.9rem;
-
-	padding-left: 20%;
-	padding-right: 20%;
+	
+    font-size: 1rem;
+    padding: 1em 1.5em 1em 1.5em;
 }
 
 .summary .box.reader,
@@ -599,6 +605,16 @@ span.highlight.avs {
 .summary .box *:first-child,
 .summary .wide *:first-child {
 	margin-top: 0;
+}
+
+.summary .wide.relaxed p+ul {
+    margin-top: 0em;
+    margin-left: 1em;
+}
+
+.summary .wide.relaxed ul li:before {
+    content: "\21b3";
+    border: none;
 }
 
 .summary .box.gallery,

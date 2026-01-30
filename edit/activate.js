@@ -98,6 +98,7 @@ function wrappers(context) {
 		'summarine.wrapRewrite': { tag: 'rewrite', type: 'box' },
 		'summarine.wrapSyntax': { tag: 'syntax', type: 'box' },
 		'summarine.wrapWide': { tag: 'wide', type: 'box' },
+		'summarine.wrapRelaxed': { tag: 'relaxed', type: 'box' },
 		'summarine.wrapWideCenter': { tag: 'widec', type: 'box' },
 		'summarine.wrapWideJustified': { tag: 'widej', type: 'box' },
 		'summarine.wrapTilde': { tag: '~', type: 'inline' },
