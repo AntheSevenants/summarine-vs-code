@@ -37,7 +37,11 @@ function generateWikiLink(reference) {
     if (friendlyNameStr.length > 0) {
         markdownLink = `[${friendlyNameStr}](vscode://ballekes})`; 
     } else {
-        markdownLink = `[${filenameStr}#${sectionStr}](vscode://ballekes})`; 
+        if (sectionStr.length > 0) {
+            markdownLink = `[${filenameStr}#${sectionStr}](vscode://ballekes})`; 
+        } else {
+            markdownLink = `[${filenameStr}](vscode://ballekes})`; 
+        }
     }
 
     return markdownLink;
