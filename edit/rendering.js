@@ -11,7 +11,7 @@ const manipulate = require("../edit/manipulate");
  * @param {string} coursePath The Markdown text to convert.
  * @param {string} fileName The Markdown text to convert.
  */
-function setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme, update = false) {
+function setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme, update = false, fixed = false, filename = null) {
 	// Construct the full path to the "settings.json" file inside the "summarine" folder in the extension directory
 	const extensionPath = context.extensionPath;
 	const settingsPath = path.join(extensionPath, '/summarine', 'settings.json');
@@ -26,7 +26,12 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 
 		const friendlyName = path.parse(filePath).name;
 		const directoryName = path.basename(path.dirname(filePath));
-		panel.title = friendlyName;
+
+		if (fixed) {
+			panel.title = "Fixed render pane";
+		} else {
+			panel.title = friendlyName;
+		}
 
 		settings = JSON.parse(settings);
 		summarine.render(markdownText, filePath, settings).then(htmlContent => {
@@ -38,8 +43,9 @@ function setWebviewContent(context, panel, markdownText, filePath, metaPath, res
 					htmlContent = tools.fixLinks(context, htmlContent, panel.webview, documentPath);
 					panel.webview.html = htmlContent;
 				});
+				panel.webview.postMessage({ "command": "filename", "content": filePath });
 			} else {
-				panel.webview.postMessage({ "command": "update", "content": htmlContent });
+				panel.webview.postMessage({ "command": "update", "content": htmlContent, "filename": filePath });
 			}
 		});
 

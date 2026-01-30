@@ -6,9 +6,24 @@ const manipulate = require("../edit/manipulate");
 const Tools = require("../edit/tools");
 const Paste = require("../edit/paste");
 const Clam = require("../edit/clam");
+const Interface = require("../edit/interface");
 
-const RENDER_TIMEOUT_DURATION = 500 /* in ms */
-let renderTimeout = false;
+const lastMarkdownEditors = new Map();
+
+function getActiveEditorGroupIndex() {
+	const activeGroup = vscode.window.tabGroups.activeTabGroup;
+	const groups = vscode.window.tabGroups.all;
+	const activeEditorGroupIndex = groups.indexOf(activeGroup);
+
+	// console.log("Index:");
+	// console.log(activeEditorGroupIndex);
+
+	return activeEditorGroupIndex;
+}
+
+function activeEditorReliable() {
+	return vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path == vscode.window.activeTextEditor.document.fileName;
+}
 
 function sidePreview(context) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -16,65 +31,69 @@ function sidePreview(context) {
 	console.log('Congratulations, your extension "summarine" is now active!');
 
 	let sidePreviewCommand = vscode.commands.registerCommand('summarine.sidePreview', function () {
-		// Create a new webview panel
-		const panel = vscode.window.createWebviewPanel(
-			'markdownPreview', // Identifies the type of the webview panel
-			'Markdown Preview', // Title of the panel
-			vscode.ViewColumn.Beside, // Editor column to show the new webview panel in.
-			{
-				enableScripts: true,
-				retainContextWhenHidden: true,
-				enableFindWidget: true,
-				// localResourceRoots: [vscode.Uri.joinPath(context.extensionUri, 'summarine'),
-				// vscode.Uri.joinPath(context.extensionUri, 'summarine', 'static'),
-				// ]
-			} // Options to control the webview panel
-		);
+		Interface.doRender(context);
+	});
 
-		// Get the active text editor
-		const editor = vscode.window.activeTextEditor;
-		const colorTheme = vscode.window.activeColorTheme.kind == vscode.ColorThemeKind.Light ? "light" : "dark";
+	let fixedSidePreviewCommand = vscode.commands.registerCommand('summarine.fixedSidePreview', function () {
+		const activeEditorGroupIndex = getActiveEditorGroupIndex();
+		if (!activeEditorReliable()) {
+			// If the active editor is unreliable when spawning the side preview, tab changes in the wrong window will respond and change the webview contents
+			vscode.window.showErrorMessage("VS Code reported an unreliable tab group index due to a bug. Switch tabs in your active window and try again.");
+			return;
+		}
 
+		Interface.doRender(context, activeEditorGroupIndex, false);
+	});
+
+	let onChangeEditor = vscode.window.onDidChangeActiveTextEditor((editor) => {
 		if (editor) {
-			const doc = editor.document;
+			const fileName = editor.document.fileName;
+			const isMarkdown = editor.document.languageId === 'markdown';
 
-			const filePath = doc.uri.fsPath; // e.g. /summarine/Elastic Net/glmnet intrduction.md
+			// Check if it's a different Markdown file
+			if (isMarkdown) {
+				const activeEditorGroupIndex = getActiveEditorGroupIndex();
+				// Check if tab group has associated window yet
+				const lastEditorForWindow = lastMarkdownEditors.get(activeEditorGroupIndex);
+				// console.log(lastEditorForWindow);
+				// console.log(fileName);
 
-			let orange = vscode.window.createOutputChannel("Orange");
-			orange.appendLine(filePath);
+				// A bug in VS Code makes it so, when changing focus across windows, the tab group does not change (even if it does!)
+				// I solve this by checking whether the supposed active tab equals the path returned by the active editor
+				// If those two match, the data is trustworthy
+				// It's not a perfect solution, but it's better than nothing!
+				// const trueChange = vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path == editor.document.fileName;
+				const trueChange = activeEditorReliable();
 
-			const metaInfo = Tools.findCourseMetaInfo(filePath);
+				// console.log(vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path);
+				// console.log(editor.document.fileName);
 
-			if (metaInfo != null) {
-				const [metaPath, resourcesPath] = metaInfo;
-				let markdownText = editor.document.getText();
+				if (!trueChange) {
+					return;
+				}
 
-				// Set the initial HTML content
-				rendering.setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme);
+				if (fileName !== lastEditorForWindow) {
+					// Update current Markdown editor
+					lastMarkdownEditors.set(activeEditorGroupIndex, fileName);
 
-				// Update content when the document changes
-				const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(event => {
-					if (event.document.uri.toString() === doc.uri.toString()) {
-						/* Reset the rendering timeout to prevent rendering from happening for now */
-						clearTimeout(renderTimeout);
-
-						renderTimeout = setTimeout(() => {
-							let markdownText = editor.document.getText();
-							rendering.setWebviewContent(context, panel, markdownText, filePath, metaPath, resourcesPath, colorTheme, true);
-						}, RENDER_TIMEOUT_DURATION);
-					}
-				});
-
-				// Dispose event listener when the panel is closed
-				panel.onDidDispose(() => {
-					changeDocumentSubscription.dispose();
-				});
-			} else {
-				vscode.window.showInformationMessage("meta.json or .resources not found!");
+					Interface.doRender(context, activeEditorGroupIndex, true);
+				}
 			}
 		}
 	});
+
+	// let onChangeTabGroup = vscode.window.tabGroups.onDidChangeTabGroups(() => {
+	// 	const index = vscode.window.tabGroups.all.indexOf(
+	// 		vscode.window.tabGroups.activeTabGroup
+	// 	);
+	// 	console.log("Tab group:");
+	// 	console.log(index);
+	// });
+
 	context.subscriptions.push(sidePreviewCommand);
+	context.subscriptions.push(fixedSidePreviewCommand);
+	context.subscriptions.push(onChangeEditor);
+	// context.subscriptions.push(onChangeTabGroup);
 }
 
 function wrappers(context) {
@@ -134,14 +153,14 @@ function insertFromDisk(context) {
 
 function activateClam(context) {
 	vscode.commands.registerCommand('summarine.activateClam', async () => {
-       Clam.activateClam();
-    });
+		Clam.activateClam();
+	});
 }
 
 function applyClam(context) {
 	vscode.commands.registerCommand('summarine.applyClam', async () => {
 		Clam.applyClam();
-	 });
+	});
 }
 
 module.exports = { sidePreview, wrappers, paste, insertFromDisk, activateClam, applyClam };

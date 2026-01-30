@@ -5,6 +5,9 @@
 </div>
 
 <script>
+    let cachedScrollPositions = {};
+    let currentFilename = {};
+
     class UI {
         static scrolledToBottom(overflowElement) {
             let scrollMax = UI.scrollBottomMax(overflowElement);
@@ -146,6 +149,22 @@
         switch (message.command) {
             case 'update':
                 updateHtml(message.content);
+
+                if (message.filename !== undefined) {
+                    if (currentFilename != message.filename) {
+                        currentFilename = message.filename;
+
+                        if (cachedScrollPositions[message.filename] !== undefined) {
+                            UI.scrollToPosition(document.documentElement, cachedScrollPositions[currentFilename]);
+                        } else {
+                            UI.scrollToPosition(document.documentElement, 0);
+                        }
+                    }
+                }
+                break;
+            case 'filename':
+                cachedScrollPositions[message.filename] = 0;
+                currentFilename = message.filename;
                 break;
         }
     });
@@ -159,6 +178,11 @@
             const headingText = event.target.innerText;
             vscode.postMessage({ command: 'insertHeading', text: headingText });
         }
+    });
+
+    window.addEventListener('scrollend', (event) => {
+        cachedScrollPositions[currentFilename] = document.documentElement.scrollTop;
+        console.log(document.documentElement.scrollTop);
     });
 </script>
 </div>
