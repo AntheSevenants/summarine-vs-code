@@ -3,6 +3,7 @@ const path = require('path');
 
 const Tools = require("../edit/tools");
 const rendering = require("../edit/rendering");
+const Panel = require("../edit/panel");
 
 const webviewMap = new Map();
 
@@ -86,6 +87,14 @@ function doRender(context, panelID = null, passive = true) {
             // Update content when the document changes
             const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(event => {
                 if (event.document.uri.toString() === doc.uri.toString() || fixedPane) {
+                    if (panelID != Panel.getActiveEditorGroupIndex()) {
+                        return;
+                    }
+
+                    if (!Panel.activeEditorReliable()) {
+                        return;
+                    }
+
                     /* Reset the rendering timeout to prevent rendering from happening for now */
                     clearTimeout(renderTimeout);
 

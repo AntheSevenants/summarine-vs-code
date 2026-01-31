@@ -1,5 +1,4 @@
 const vscode = require('vscode');
-const path = require('path');
 const fs = require('fs');
 
 const rendering = require("../edit/rendering");
@@ -8,26 +7,9 @@ const Tools = require("../edit/tools");
 const Paste = require("../edit/paste");
 const Clam = require("../edit/clam");
 const Interface = require("../edit/interface");
+const Panel = require("../edit/panel");
 
 const lastMarkdownEditors = new Map();
-
-function getActiveEditorGroupIndex() {
-	const activeGroup = vscode.window.tabGroups.activeTabGroup;
-	const groups = vscode.window.tabGroups.all;
-	const activeEditorGroupIndex = groups.indexOf(activeGroup);
-
-	// console.log("Index:");
-	// console.log(activeEditorGroupIndex);
-
-	return activeEditorGroupIndex;
-}
-
-function activeEditorReliable() {
-	const tabGroupPath = path.parse(vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path).name;
-	const editorPath = path.parse(vscode.window.activeTextEditor.document.fileName).name;
-
-	return tabGroupPath == editorPath;
-}
 
 function sidePreview(context) {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -39,8 +21,8 @@ function sidePreview(context) {
 	});
 
 	let fixedSidePreviewCommand = vscode.commands.registerCommand('summarine.fixedSidePreview', function () {
-		const activeEditorGroupIndex = getActiveEditorGroupIndex();
-		if (!activeEditorReliable()) {
+		const activeEditorGroupIndex = Panel.getActiveEditorGroupIndex();
+		if (!Panel.activeEditorReliable()) {
 			// If the active editor is unreliable when spawning the side preview, tab changes in the wrong window will respond and change the webview contents
 			vscode.window.showErrorMessage("VS Code reported an unreliable tab group index due to a bug. Switch tabs in your active window and try again.");
 			return;
@@ -56,7 +38,7 @@ function sidePreview(context) {
 
 			// Check if it's a different Markdown file
 			if (isMarkdown) {
-				const activeEditorGroupIndex = getActiveEditorGroupIndex();
+				const activeEditorGroupIndex = Panel.getActiveEditorGroupIndex();
 				// Check if tab group has associated window yet
 				const lastEditorForWindow = lastMarkdownEditors.get(activeEditorGroupIndex);
 				// console.log(lastEditorForWindow);
@@ -67,7 +49,7 @@ function sidePreview(context) {
 				// If those two match, the data is trustworthy
 				// It's not a perfect solution, but it's better than nothing!
 				// const trueChange = vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path == editor.document.fileName;
-				const trueChange = activeEditorReliable();
+				const trueChange = Panel.activeEditorReliable();
 
 				// console.log(vscode.window.tabGroups.activeTabGroup.activeTab.input.uri.path);
 				// console.log(editor.document.fileName);
